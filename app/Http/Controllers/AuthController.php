@@ -58,6 +58,8 @@ class AuthController extends Controller
         $socialiteUser->stateless();
         $socialiteUser = $socialiteUser->user();
 
+        // Todo: Users without email are unverified
+
         $user = User::updateOrCreate(
             ['id' => $socialiteUser->getId()],
             [

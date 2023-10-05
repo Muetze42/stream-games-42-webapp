@@ -7,7 +7,9 @@ module.exports = {
         node: true
     },
     extends: ['eslint:recommended', 'plugin:vue/vue3-recommended', '@vue/eslint-config-prettier'],
-    globals: {},
+    globals: {
+        axios: true
+    },
     rules: {
         'vue/require-default-prop': 'off',
         'vue/multi-word-component-names': 'off',

@@ -12,8 +12,15 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        $schedule->command('git:backup:run')->daily();
-        // $schedule->command('inspire')->hourly();
+        $schedule->command('git:backup:run')
+            ->daily();
+        $schedule->command('app:releases:sync')
+            ->hourly();
+
+        $schedule->command('queue:work', [
+            '--timeout' => 0,
+            '--stop-when-empty'
+        ])->everyMinute()->withoutOverlapping();
     }
 
     /**
@@ -21,7 +28,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands(): void
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }

@@ -59,3 +59,23 @@ if (!function_exists('getSetupExe')) {
         return $downloadUrl;
     }
 }
+
+if (!function_exists('errorImage')) {
+    /**
+     * Get an SVG by error code.
+     *
+     * @param int $errorCode
+     * @return string
+     */
+    function errorImage(int $errorCode): string
+    {
+        $errorImages = [
+            '401' => '403.svg',
+            '403' => '403.svg',
+            '404' => '404.svg',
+            '500' => '503.svg',
+        ];
+
+        return $errorImages[$errorCode] ?? '404.svg';
+    }
+}

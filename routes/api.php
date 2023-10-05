@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\GitHubWebhookController;
+use App\Http\Controllers\Api\ReleaseController;
 use Illuminate\Support\Facades\Route;
 use NormanHuth\HelpersLaravel\App\Http\Middleware\EnsureGitHubTokenIsValid;
 
@@ -19,6 +20,16 @@ use NormanHuth\HelpersLaravel\App\Http\Middleware\EnsureGitHubTokenIsValid;
 //    return $request->user();
 //});
 
+Route::get('/', function () {
+    return [
+        'message' => 'It work’s!',
+        'authenticated' => auth()->check(),
+        'time' => now(),
+    ];
+});
+Route::post('/releases', [ReleaseController::class, 'index'])
+    ->name('releases');
+Route::get('/releases', [ReleaseController::class, 'index']);
 Route::post(
     'github-webhook/' . config('services.github.webhook_path') . '/release',
     [GitHubWebhookController::class, 'release']
