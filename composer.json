@@ -18,6 +18,7 @@
         "norman-huth/helpers-collection-laravel": "^1.1",
         "norman-huth/laravel-api-controller": "@dev",
         "norman-huth/laravel-git-backup": "^1.0",
+        "norman-huth/virus-total-php": "^1.0",
         "socialiteproviders/twitch": "^5.3",
         "spatie/laravel-activitylog": "^4.7"
     },

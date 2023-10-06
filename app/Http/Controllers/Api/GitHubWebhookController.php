@@ -24,15 +24,7 @@ class GitHubWebhookController extends Controller
         }
 
         $release = $payload['release'];
-        Release::updateOrCreate(
-            ['release_id' => $release['id']],
-            [
-                'tag' => $release['tag_name'],
-                'download_url' => getSetupExe($release['assets']),
-                'prerelease' => $release['prerelease'],
-                'published_at' => $release['published_at']
-            ]
-        );
+        updateOrCreateRelease($release);
 
         return true;
     }

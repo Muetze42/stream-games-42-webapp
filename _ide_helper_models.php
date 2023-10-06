@@ -25,6 +25,7 @@ namespace App\Models{
  * @property \Illuminate\Support\Collection|null $properties
  * @property string|null $batch_uuid
  * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property-read \Illuminate\Database\Eloquent\Model|\Eloquent $causer
  * @property-read \Illuminate\Support\Collection $changes
  * @property-read \Illuminate\Database\Eloquent\Model|\Eloquent $subject
@@ -36,11 +37,13 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Activity inLog(...$logNames)
  * @method static \Illuminate\Database\Eloquent\Builder|Activity newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Activity newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Activity onlyTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Activity query()
  * @method static \Illuminate\Database\Eloquent\Builder|Activity whereBatchUuid($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Activity whereCauserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Activity whereCauserType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Activity whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Activity whereDeletedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Activity whereDescription($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Activity whereEvent($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Activity whereId($value)
@@ -48,8 +51,70 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Activity whereProperties($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Activity whereSubjectId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Activity whereSubjectType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Activity withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Activity withoutTrashed()
  */
 	class Activity extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\BannedUser
+ *
+ * @property int $id
+ * @property int $broadcaster_id
+ * @property int $user_id
+ * @property int $moderator_id
+ * @property string|null $reason
+ * @property \Illuminate\Support\Carbon|null $expires_at
+ * @property string|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \App\Models\User|null $user
+ * @method static \Illuminate\Database\Eloquent\Builder|BannedUser newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|BannedUser newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|BannedUser onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|BannedUser query()
+ * @method static \Illuminate\Database\Eloquent\Builder|BannedUser whereBroadcasterId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BannedUser whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BannedUser whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BannedUser whereExpiresAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BannedUser whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BannedUser whereModeratorId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BannedUser whereReason($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BannedUser whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BannedUser whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BannedUser withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|BannedUser withoutTrashed()
+ */
+	class BannedUser extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\BlockedUser
+ *
+ * @property int $id
+ * @property int $broadcaster_id
+ * @property int $user_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \App\Models\User|null $user
+ * @method static \Illuminate\Database\Eloquent\Builder|BlockedUser newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|BlockedUser newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|BlockedUser onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|BlockedUser query()
+ * @method static \Illuminate\Database\Eloquent\Builder|BlockedUser whereBroadcasterId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BlockedUser whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BlockedUser whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BlockedUser whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BlockedUser whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BlockedUser whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BlockedUser withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|BlockedUser withoutTrashed()
+ */
+	class BlockedUser extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -109,25 +174,38 @@ namespace App\Models{
  *
  * @property int $id
  * @property int $release_id
+ * @property string|null $name
+ * @property string|null $body
  * @property string $tag
  * @property string|null $download_url
+ * @property string|null $virus_total_id
+ * @property array|null $virus_total_stats
+ * @property mixed|null $file_hashes
  * @property bool $prerelease
+ * @property int $active
  * @property int $batch
  * @property \Illuminate\Support\Carbon|null $published_at
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Release active()
  * @method static \Illuminate\Database\Eloquent\Builder|Release newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Release newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Release query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Release whereActive($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Release whereBatch($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Release whereBody($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Release whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Release whereDownloadUrl($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Release whereFileHashes($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Release whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Release whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Release wherePrerelease($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Release wherePublishedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Release whereReleaseId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Release whereTag($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Release whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Release whereVirusTotalId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Release whereVirusTotalStats($value)
  */
 	class Release extends \Eloquent {}
 }
@@ -148,6 +226,8 @@ namespace App\Models{
  * @property string|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property mixed $password
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\BannedUser> $bannedUsers
+ * @property-read int|null $banned_users_count
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
  * @property-read int|null $notifications_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\PersonalAccessToken> $tokens

@@ -1,5 +1,8 @@
 <?php
 
+use App\Jobs\Releases\VirusTotalScan;
+use App\Models\Release;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Encryption\Encrypter;
 
 if (!function_exists('clientEncrypt')) {
@@ -48,15 +51,13 @@ if (!function_exists('getSetupExe')) {
      */
     function getSetupExe(array $assets): ?string
     {
-        $downloadUrl = null;
         foreach ($assets as $asset) {
             if ($asset['state'] == 'uploaded' && str_ends_with($asset['browser_download_url'], 'setup.exe')) {
-                $downloadUrl = $asset['browser_download_url'];
-                break;
+                return $asset['browser_download_url'];
             }
         }
 
-        return $downloadUrl;
+        return null;
     }
 }
 
@@ -77,5 +78,36 @@ if (!function_exists('errorImage')) {
         ];
 
         return $errorImages[$errorCode] ?? '404.svg';
+    }
+}
+
+if (!function_exists('updateOrCreateRelease')) {
+    /**
+     * Create or update a record matching the attributes, and fill it with values from GitHub API response.
+     *
+     * @param array $data
+     * @param int $batch
+     * @return \Illuminate\Database\Eloquent\Model|\App\Models\Release
+     */
+    function updateOrCreateRelease(array $data, int $batch = 99999999): Model|Release
+    {
+        $release = Release::updateOrCreate(
+            ['release_id' => $data['id']],
+            [
+                'name' => $data['name'],
+                'body' => $data['body'],
+                'tag' => $data['tag_name'],
+                'download_url' => getSetupExe($data['assets']),
+                'prerelease' => $data['prerelease'],
+                'batch' => $batch,
+                'published_at' => $data['published_at']
+            ]
+        );
+
+        if ($release->download_url && !$release->virus_total_id) {
+            VirusTotalScan::dispatch($release);
+        }
+
+        return $release;
     }
 }

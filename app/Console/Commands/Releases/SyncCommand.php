@@ -32,16 +32,7 @@ class SyncCommand extends Command
         $releases = GitHub::listReleases();
 
         foreach ($releases as $release) {
-            Release::updateOrCreate(
-                ['release_id' => $release['id']],
-                [
-                    'tag' => $release['tag_name'],
-                    'download_url' => getSetupExe($release['assets']),
-                    'prerelease' => $release['prerelease'],
-                    'batch' => $batch,
-                    'published_at' => $release['published_at']
-                ]
-            );
+            updateOrCreateRelease($release, $batch);
         }
 
         Release::where('batch', '<', $batch)->delete();
