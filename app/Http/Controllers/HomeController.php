@@ -14,9 +14,6 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        return \NormanHuth\StreamGames42\Services\AppConnector::getAttempt();
-        return \NormanHuth\StreamGames42\Models\ConnectionAttempt::create();
-
         return Inertia::render('Home/Index');
     }
 }

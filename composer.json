@@ -10,7 +10,7 @@
     "repositories": [
         {
             "type": "path",
-            "url":  "./packages/stream-games-42-webapp-package"
+            "url":  "./packages/laravel-app-connector"
         }
     ],
     "require": {
@@ -23,8 +23,8 @@
         "laravel/tinker": "^2.8",
         "norman-huth/helpers-collection-laravel": "^1.1",
         "norman-huth/laravel-api-controller": "@dev",
+        "norman-huth/laravel-app-connector": "@dev",
         "norman-huth/laravel-git-backup": "^1.0",
-        "norman-huth/stream-games-42": "@dev",
         "norman-huth/virus-total-php": "^1.0",
         "socialiteproviders/twitch": "^5.3",
         "spatie/laravel-activitylog": "^4.7"

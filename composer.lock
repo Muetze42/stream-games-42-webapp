@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9e7d11c024565d72c66f33e9ae9240ab",
+    "content-hash": "fc74233788f19c57c043aec686ee6439",
     "packages": [
         {
             "name": "brick/math",
@@ -2643,6 +2643,48 @@
             "time": "2023-09-25T16:44:52+00:00"
         },
         {
+            "name": "norman-huth/laravel-app-connector",
+            "version": "dev-development",
+            "dist": {
+                "type": "path",
+                "url": "./packages/laravel-app-connector",
+                "reference": "c2860d2a6ac7f38bb8329c5e42c21300ca9bdd99"
+            },
+            "require": {
+                "ext-filter": "*",
+                "ext-hash": "*",
+                "ext-json": "*",
+                "illuminate/http": "^8.0|^9.0|^10.0",
+                "illuminate/routing": "^8.0|^9.0|^10.0",
+                "php": "^8.2"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "NormanHuth\\LaravelAppConnector\\Providers\\PackageProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "NormanHuth\\LaravelAppConnector\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Norman Huth",
+                    "homepage": "https://huth.it"
+                }
+            ],
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
             "name": "norman-huth/laravel-git-backup",
             "version": "1.0.1",
             "source": {
@@ -2763,48 +2805,6 @@
                 }
             ],
             "time": "2023-08-25T20:58:13+00:00"
-        },
-        {
-            "name": "norman-huth/stream-games-42",
-            "version": "dev-development",
-            "dist": {
-                "type": "path",
-                "url": "./packages/stream-games-42-webapp-package",
-                "reference": "8d392e8d9bf148b8b0d8148db1c9320ed55bda91"
-            },
-            "require": {
-                "ext-filter": "*",
-                "ext-hash": "*",
-                "ext-json": "*",
-                "illuminate/http": "^8.0|^9.0|^10.0",
-                "illuminate/routing": "^8.0|^9.0|^10.0",
-                "php": "^8.2"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "NormanHuth\\StreamGames42\\Providers\\PackageProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "NormanHuth\\StreamGames42\\": "src/"
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Norman Huth",
-                    "homepage": "https://huth.it"
-                }
-            ],
-            "transport-options": {
-                "relative": true
-            }
         },
         {
             "name": "norman-huth/virus-total-php",
@@ -9884,7 +9884,7 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "norman-huth/laravel-api-controller": 20,
-        "norman-huth/stream-games-42": 20
+        "norman-huth/laravel-app-connector": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
