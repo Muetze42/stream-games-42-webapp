@@ -1,3 +1,7 @@
 [submodule "resources"]
 	path = resources
 	url = https://github.com/Muetze42/stream-games-42-webapp-resources.git
+[submodule "packages/stream-games-42-webapp-package"]
+	path = packages/stream-games-42-webapp-package
+	url = https://github.com/Muetze42/stream-games-42-webapp-package.git
+	branch = development

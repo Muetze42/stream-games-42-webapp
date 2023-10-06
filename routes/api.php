@@ -16,10 +16,6 @@ use NormanHuth\HelpersLaravel\App\Http\Middleware\EnsureGitHubTokenIsValid;
 |
 */
 
-//Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//    return $request->user();
-//});
-
 Route::get('/', function () {
     return [
         'message' => 'It work’s!',
