@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Release;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -15,7 +14,8 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-//        $stableRelease = Release::
+        return \NormanHuth\StreamGames42\Services\AppConnector::getAttempt();
+        return \NormanHuth\StreamGames42\Models\ConnectionAttempt::create();
 
         return Inertia::render('Home/Index');
     }

@@ -18,7 +18,7 @@ class AuthController extends Controller
     protected array $scopes = [
         //'channel:read:editors',
         'moderation:read',
-        'user:read:blocked_users',
+        //'user:read:blocked_users',
         'user:read:email',
     ];
 
