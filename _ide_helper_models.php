@@ -234,9 +234,9 @@ namespace App\Models{
 	class User extends \Eloquent {}
 }
 
-namespace NormanHuth\StreamGames42\Models{
+namespace NormanHuth\LaravelAppConnector\Models{
 /**
- * NormanHuth\StreamGames42\Models\ConnectionAttempt
+ * NormanHuth\LaravelAppConnector\Models\ConnectionAttempt
  *
  * @property string $id
  * @property string|null $client

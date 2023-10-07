@@ -140,7 +140,7 @@ return [
 
     'model_locations' => [
         'app/Models',
-        'packages/stream-games-42-webapp-package/src/Models',
+        'packages/laravel-app-connector/src/Models',
     ],
 
     /*
