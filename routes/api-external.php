@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\External\AuthController;
-use App\Http\Controllers\External\ContentController;
+use App\Http\Controllers\External\SettingController;
 use App\Http\Controllers\External\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -33,4 +33,4 @@ Route::prefix('connect')->name('connect.')->group(function () {
 Route::get('user', [UserController::class, 'show'])
     ->name('get.authorized.user');
 
-Route::resource('resources.contents', ContentController::class);
+Route::resource('settings', SettingController::class);

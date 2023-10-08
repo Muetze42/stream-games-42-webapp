@@ -1,6 +1,12 @@
 {
     "name": "norman-huth/stream-games-42-webapp",
     "type": "project",
+    "authors": [
+        {
+            "name": "Norman Huth",
+            "homepage": "https://huth.it"
+        }
+    ],
     "description": "Laravel web application for „Stream Games 42“.",
     "keywords": [
         "laravel",
