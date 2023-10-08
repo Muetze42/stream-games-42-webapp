@@ -14,6 +14,7 @@ class PersonalAccessToken extends SanctumPersonalAccessToken
     protected $fillable = [
         'name',
         'client',
+        'platform',
         'token',
         'abilities',
         'expires_at',
@@ -26,6 +27,7 @@ class PersonalAccessToken extends SanctumPersonalAccessToken
      */
     protected $hidden = [
         'client',
+        'platform',
         'token',
     ];
 
@@ -38,15 +40,23 @@ class PersonalAccessToken extends SanctumPersonalAccessToken
     public static function findToken($token): null|static
     {
         $client = request()->header('machineId');
+        $platform = request()->header('platform');
 
         if (!str_contains($token, '|')) {
-            return static::where('token', hash('sha256', $token))->where('client', $client)->first();
+            return static::where('token', hash('sha256', $token))
+                ->where('client', $client)->first()
+                ->where('platform', $platform)->first();
         }
 
         [$id, $token] = explode('|', $token, 2);
 
         /* @var self $instance */
-        if ($instance = static::where('id', $id)->where('client', $client)->first()) {
+        if (
+            $instance = static::where('id', $id)
+                ->where('client', $client)
+                ->where('platform', $platform)
+                ->first()
+        ) {
             return hash_equals($instance->token, hash('sha256', $token)) ? $instance : null;
         }
 
@@ -61,7 +71,12 @@ class PersonalAccessToken extends SanctumPersonalAccessToken
     public static function booted(): void
     {
         static::creating(function (self $token) {
-            $token->client = request()->header('machineId');
+            if (!$token->client) {
+                $token->client = request()->header('machineId');
+            }
+            if (!$token->platform) {
+                $token->platform = request()->header('platform');
+            }
         });
     }
 }

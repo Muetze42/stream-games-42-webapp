@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fc74233788f19c57c043aec686ee6439",
+    "content-hash": "7b0f9bb7e4018da2892fab46ed523f67",
     "packages": [
         {
             "name": "brick/math",
@@ -2641,48 +2641,6 @@
                 }
             ],
             "time": "2023-09-25T16:44:52+00:00"
-        },
-        {
-            "name": "norman-huth/laravel-app-connector",
-            "version": "dev-development",
-            "dist": {
-                "type": "path",
-                "url": "./packages/laravel-app-connector",
-                "reference": "c2860d2a6ac7f38bb8329c5e42c21300ca9bdd99"
-            },
-            "require": {
-                "ext-filter": "*",
-                "ext-hash": "*",
-                "ext-json": "*",
-                "illuminate/http": "^8.0|^9.0|^10.0",
-                "illuminate/routing": "^8.0|^9.0|^10.0",
-                "php": "^8.2"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "NormanHuth\\LaravelAppConnector\\Providers\\PackageProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "NormanHuth\\LaravelAppConnector\\": "src/"
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Norman Huth",
-                    "homepage": "https://huth.it"
-                }
-            ],
-            "transport-options": {
-                "relative": true
-            }
         },
         {
             "name": "norman-huth/laravel-git-backup",
@@ -8387,16 +8345,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "10.4.0",
+            "version": "10.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "9784e877e3700de37475545bdbdce8383ff53d25"
+                "reference": "62bd7af13d282deeb95650077d28ba3600ca321c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/9784e877e3700de37475545bdbdce8383ff53d25",
-                "reference": "9784e877e3700de37475545bdbdce8383ff53d25",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/62bd7af13d282deeb95650077d28ba3600ca321c",
+                "reference": "62bd7af13d282deeb95650077d28ba3600ca321c",
                 "shasum": ""
             },
             "require": {
@@ -8468,7 +8426,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/10.4.0"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/10.4.1"
             },
             "funding": [
                 {
@@ -8484,7 +8442,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-10-06T03:41:22+00:00"
+            "time": "2023-10-08T05:01:11+00:00"
         },
         {
             "name": "psr/cache",
@@ -9883,8 +9841,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "norman-huth/laravel-api-controller": 20,
-        "norman-huth/laravel-app-connector": 20
+        "norman-huth/laravel-api-controller": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

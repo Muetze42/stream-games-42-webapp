@@ -59,62 +59,32 @@ namespace App\Models{
 
 namespace App\Models{
 /**
- * App\Models\BannedUser
+ * App\Models\ConnectionAttempt
  *
- * @property int $id
- * @property int $broadcaster_id
- * @property int $user_id
- * @property int $moderator_id
- * @property string|null $reason
- * @property \Illuminate\Support\Carbon|null $expires_at
- * @property string|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property-read \App\Models\User|null $user
- * @method static \Illuminate\Database\Eloquent\Builder|BannedUser newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|BannedUser newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|BannedUser onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder|BannedUser query()
- * @method static \Illuminate\Database\Eloquent\Builder|BannedUser whereBroadcasterId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|BannedUser whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|BannedUser whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|BannedUser whereExpiresAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|BannedUser whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|BannedUser whereModeratorId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|BannedUser whereReason($value)
- * @method static \Illuminate\Database\Eloquent\Builder|BannedUser whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|BannedUser whereUserId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|BannedUser withTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder|BannedUser withoutTrashed()
- */
-	class BannedUser extends \Eloquent {}
-}
-
-namespace App\Models{
-/**
- * App\Models\BlockedUser
- *
- * @property int $id
- * @property int $broadcaster_id
- * @property int $user_id
+ * @property string $id
+ * @property string|null $authenticatable_type
+ * @property int|null $authenticatable_id
+ * @property string|null $client
+ * @property string|null $platform
+ * @property string|null $uri
+ * @property mixed|null $token
+ * @property array|null $data
  * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property-read \App\Models\User|null $user
- * @method static \Illuminate\Database\Eloquent\Builder|BlockedUser newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|BlockedUser newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|BlockedUser onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder|BlockedUser query()
- * @method static \Illuminate\Database\Eloquent\Builder|BlockedUser whereBroadcasterId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|BlockedUser whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|BlockedUser whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|BlockedUser whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|BlockedUser whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|BlockedUser whereUserId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|BlockedUser withTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder|BlockedUser withoutTrashed()
+ * @property-read \Illuminate\Database\Eloquent\Model|\Eloquent $authenticatable
+ * @method static \Illuminate\Database\Eloquent\Builder|ConnectionAttempt newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ConnectionAttempt newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ConnectionAttempt query()
+ * @method static \Illuminate\Database\Eloquent\Builder|ConnectionAttempt whereAuthenticatableId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ConnectionAttempt whereAuthenticatableType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ConnectionAttempt whereClient($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ConnectionAttempt whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ConnectionAttempt whereData($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ConnectionAttempt whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ConnectionAttempt wherePlatform($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ConnectionAttempt whereToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ConnectionAttempt whereUri($value)
  */
-	class BlockedUser extends \Eloquent {}
+	class ConnectionAttempt extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -126,6 +96,7 @@ namespace App\Models{
  * @property int $tokenable_id
  * @property string $name
  * @property string|null $client
+ * @property string|null $platform
  * @property string $token
  * @property array|null $abilities
  * @property \Illuminate\Support\Carbon|null $last_used_at
@@ -143,6 +114,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|PersonalAccessToken whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|PersonalAccessToken whereLastUsedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|PersonalAccessToken whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PersonalAccessToken wherePlatform($value)
  * @method static \Illuminate\Database\Eloquent\Builder|PersonalAccessToken whereToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|PersonalAccessToken whereTokenableId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|PersonalAccessToken whereTokenableType($value)
@@ -198,7 +170,9 @@ namespace App\Models{
  * App\Models\User
  *
  * @property int $id
+ * @property string $twitch_id
  * @property string $name
+ * @property string|null $login
  * @property string|null $email
  * @property mixed|null $token
  * @property mixed|null $refresh_token
@@ -206,11 +180,11 @@ namespace App\Models{
  * @property array|null $scopes
  * @property \Illuminate\Support\Carbon|null $token_refreshed_at
  * @property \Illuminate\Support\Carbon|null $token_validated_at
- * @property string|null $created_at
+ * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property mixed $password
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\BannedUser> $bannedUsers
- * @property-read int|null $banned_users_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ConnectionAttempt> $connectionAttempts
+ * @property-read int|null $connection_attempts_count
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
  * @property-read int|null $notifications_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\PersonalAccessToken> $tokens
@@ -222,6 +196,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|User whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereEmail($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereLogin($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRefreshToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
@@ -229,31 +204,9 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|User whereToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereTokenRefreshedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereTokenValidatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereTwitchId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
  */
 	class User extends \Eloquent {}
-}
-
-namespace NormanHuth\LaravelAppConnector\Models{
-/**
- * NormanHuth\LaravelAppConnector\Models\ConnectionAttempt
- *
- * @property string $id
- * @property string|null $client
- * @property string|null $platform
- * @property string $uri
- * @property mixed $token
- * @property \Illuminate\Support\Carbon|null $created_at
- * @method static \Illuminate\Database\Eloquent\Builder|ConnectionAttempt newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|ConnectionAttempt newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|ConnectionAttempt query()
- * @method static \Illuminate\Database\Eloquent\Builder|ConnectionAttempt whereClient($value)
- * @method static \Illuminate\Database\Eloquent\Builder|ConnectionAttempt whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|ConnectionAttempt whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|ConnectionAttempt wherePlatform($value)
- * @method static \Illuminate\Database\Eloquent\Builder|ConnectionAttempt whereToken($value)
- * @method static \Illuminate\Database\Eloquent\Builder|ConnectionAttempt whereUri($value)
- */
-	class ConnectionAttempt extends \Eloquent {}
 }
 

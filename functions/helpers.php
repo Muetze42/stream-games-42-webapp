@@ -4,6 +4,7 @@ use App\Jobs\Releases\VirusTotalScan;
 use App\Models\Release;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Encryption\Encrypter;
+use Illuminate\Support\Str;
 
 if (!function_exists('clientEncrypt')) {
     /**
@@ -17,6 +18,7 @@ if (!function_exists('clientEncrypt')) {
      */
     function clientEncrypt(mixed $value, string $key, bool $serialize = true): string
     {
+        $key = Str::limit($key, 32, '');
         $encrypter = new Encrypter($key, config('app.cipher'));
 
         return $encrypter->encrypt($value, $serialize);
@@ -35,6 +37,7 @@ if (!function_exists('clientDecrypt')) {
      */
     function clientDecrypt(mixed $value, string $key, bool $serialize = true): string
     {
+        $key = Str::limit($key, 32, '');
         $encrypter = new Encrypter($key, config('app.cipher'));
 
         return $encrypter->decrypt($value, $serialize);

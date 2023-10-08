@@ -1,7 +1,3 @@
 [submodule "resources"]
 	path = resources
 	url = https://github.com/Muetze42/stream-games-42-webapp-resources.git
-[submodule "packages/laravel-app-connector"]
-	path = packages/laravel-app-connector
-	url = https://github.com/Muetze42/laravel-app-connector.git
-	branch = development

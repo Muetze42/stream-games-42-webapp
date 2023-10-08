@@ -7,12 +7,6 @@
         "framework"
     ],
     "license": "MIT",
-    "repositories": [
-        {
-            "type": "path",
-            "url":  "./packages/laravel-app-connector"
-        }
-    ],
     "require": {
         "php": "^8.2",
         "guzzlehttp/guzzle": "^7.8",
@@ -23,7 +17,6 @@
         "laravel/tinker": "^2.8",
         "norman-huth/helpers-collection-laravel": "^1.1",
         "norman-huth/laravel-api-controller": "@dev",
-        "norman-huth/laravel-app-connector": "@dev",
         "norman-huth/laravel-git-backup": "^1.0",
         "norman-huth/virus-total-php": "^1.0",
         "socialiteproviders/twitch": "^5.3",

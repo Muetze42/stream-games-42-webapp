@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use Inertia\Inertia;
 use Laravel\Socialite\Facades\Socialite;
 use App\Models\User;
@@ -61,9 +62,10 @@ class AuthController extends Controller
         // Todo: Users without email are unverified
 
         $user = User::updateOrCreate(
-            ['id' => $socialiteUser->getId()],
+            ['twitch_id' => $socialiteUser->getId()],
             [
-                'name' => $socialiteUser->getName(),
+                'name' => data_get($socialiteUser->user, 'display_name', $socialiteUser->getNickname()),
+                'login' => data_get($socialiteUser->user, 'login', Str::lower($socialiteUser->getName())),
                 'email' => $socialiteUser->getEmail(),
                 'token' => $socialiteUser->token,
                 'refresh_token' => $socialiteUser->refreshToken,
@@ -89,7 +91,7 @@ class AuthController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      *
-     * @return void
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function logout(Request $request)
     {
@@ -97,5 +99,7 @@ class AuthController extends Controller
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+
+        return redirect()->route('home');
     }
 }

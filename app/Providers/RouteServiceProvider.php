@@ -34,6 +34,11 @@ class RouteServiceProvider extends ServiceProvider
                 ->name('api.')
                 ->group(base_path('routes/api.php'));
 
+            Route::middleware(['api', 'auth:sanctum'])
+                ->prefix('api/external')
+                ->name('api-external.')
+                ->group(base_path('routes/api-external.php'));
+
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
         });

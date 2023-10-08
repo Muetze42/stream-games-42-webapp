@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<!-- @see https://pear.php.net/manual/en/package.php.php-codesniffer.annotated-ruleset.php -->
+<ruleset name="PHPCS Rules">
+    <rule ref="Generic.Files.LineLength">
+        <properties>
+            <property name="ignoreComments" value="true" />
+        </properties>
+    </rule>
+</ruleset>

@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Arr;
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,5 +19,15 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
+        $file = storage_path('app/users.json');
+
+        if (file_exists($file)) {
+            $fillable = (new User())->getFillable();
+            $users = json_decode(file_get_contents($file), true);
+            foreach ($users as $user) {
+                User::create(Arr::only($user, $fillable));
+            }
+        }
     }
 }

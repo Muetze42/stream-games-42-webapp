@@ -12,8 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->unsignedBigInteger('id')->primary();
+            $table->id();
+            $table->string('twitch_id')->unique();
             $table->string('name');
+            $table->string('login')->nullable();
             $table->string('email')->nullable();
             $table->text('token')->nullable();
             $table->text('refresh_token')->nullable();

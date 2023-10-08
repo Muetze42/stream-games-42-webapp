@@ -22,11 +22,10 @@ Route::get('/', function () {
         'authenticated' => auth()->check(),
         'time' => now(),
     ];
-});
+})->name('online-check');
 Route::post('/releases', [ReleaseController::class, 'index'])
-    ->name('releases');
-Route::get('/releases', [ReleaseController::class, 'index']);
+    ->name('release.index');
 Route::post(
     'github-webhook/' . config('services.github.webhook_path') . '/release',
     [GitHubWebhookController::class, 'release']
-)->middleware(EnsureGitHubTokenIsValid::class);
+)->middleware(EnsureGitHubTokenIsValid::class)->name('git-hub-webhook.release');

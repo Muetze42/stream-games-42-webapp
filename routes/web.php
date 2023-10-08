@@ -16,11 +16,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])
+    ->name('home');
 
 Route::prefix('auth')->group(function () {
-    Route::get('/', [AuthController::class, 'redirect']);
-    Route::post('logout', [AuthController::class, 'logout']);
+    Route::get('/', [AuthController::class, 'redirect'])
+        ->name('auth.redirect');
+    Route::post('logout', [AuthController::class, 'logout'])
+        ->name('auth.logout');
     Route::get('callback', [AuthController::class, 'callback'])
-        ->withoutMiddleware(HandleInertiaRequests::class);
+        ->withoutMiddleware(HandleInertiaRequests::class)
+        ->name('auth.callback');
 });

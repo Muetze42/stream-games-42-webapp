@@ -2,17 +2,21 @@
 
 namespace App\Models;
 
+use App\Traits\Models\CanConnectTrait;
+use DateTimeInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
+use Laravel\Sanctum\NewAccessToken;
 
 class User extends Authenticatable
 {
     use HasApiTokens;
     use HasFactory;
     use Notifiable;
+    use CanConnectTrait;
 
     /**
      * Indicates if the IDs are auto-incrementing.
@@ -22,20 +26,14 @@ class User extends Authenticatable
     public $incrementing = false;
 
     /**
-     * The name of the "created at" column.
-     *
-     * @var string|null
-     */
-    public const CREATED_AT = null;
-
-    /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
     protected $fillable = [
-        'id',
+        'twitch_id',
         'name',
+        'login',
         'email',
         'token',
         'refresh_token',
@@ -54,6 +52,9 @@ class User extends Authenticatable
         'remember_token',
         'token',
         'refresh_token',
+        'scopes',
+        'token_refreshed_at',
+        'token_validated_at',
     ];
 
     /**
@@ -71,10 +72,70 @@ class User extends Authenticatable
     ];
 
     /**
-     * Get the banned users for the user.
+     * Create a new personal access token for the user.
+     *
+     * @param string                  $name
+     * @param array                   $abilities
+     * @param \DateTimeInterface|null $expiresAt
+     *
+     * @return \Laravel\Sanctum\NewAccessToken
      */
-    public function bannedUsers(): HasMany
-    {
-        return $this->hasMany(BannedUser::class, 'broadcaster_id');
+    public function createToken(
+        string $name,
+        array $abilities = ['*'],
+        DateTimeInterface $expiresAt = null
+    ): NewAccessToken {
+        $plainTextToken = sprintf(
+            '%s%s%s',
+            config('sanctum.token_prefix', ''),
+            $tokenEntropy = Str::random(40),
+            hash('crc32b', $tokenEntropy)
+        );
+
+        $token = $this->tokens()->create([
+            'name' => $name,
+            'token' => hash('sha256', $plainTextToken),
+            'abilities' => $abilities,
+            'expires_at' => $expiresAt,
+        ]);
+
+        return new NewAccessToken($token, $plainTextToken);
+    }
+
+    /**
+     * Create a new personal access token for the user.
+     *
+     * @param string                  $name
+     * @param string                  $client
+     * @param string                  $platform
+     * @param array                   $abilities
+     * @param \DateTimeInterface|null $expiresAt
+     *
+     * @return \Laravel\Sanctum\NewAccessToken
+     */
+    public function createFilledToken(
+        string $name,
+        string $client,
+        string $platform,
+        array $abilities = ['*'],
+        DateTimeInterface $expiresAt = null
+    ): NewAccessToken {
+        $plainTextToken = sprintf(
+            '%s%s%s',
+            config('sanctum.token_prefix', ''),
+            $tokenEntropy = Str::random(40),
+            hash('crc32b', $tokenEntropy)
+        );
+
+        $token = $this->tokens()->create([
+            'name' => $name,
+            'client' => $client,
+            'platform' => $platform,
+            'token' => hash('sha256', $plainTextToken),
+            'abilities' => $abilities,
+            'expires_at' => $expiresAt,
+        ]);
+
+        return new NewAccessToken($token, $plainTextToken);
     }
 }
