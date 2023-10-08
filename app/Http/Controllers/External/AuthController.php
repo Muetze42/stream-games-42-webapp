@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\External;
 
 use App\Http\Controllers\Controller;
-use App\Services\AppConnect;
+use App\Services\AppConnectAttempts;
 
 class AuthController extends Controller
 {
@@ -14,6 +14,6 @@ class AuthController extends Controller
      */
     public function create()
     {
-        return AppConnect::create();
+        return AppConnectAttempts::create();
     }
 }

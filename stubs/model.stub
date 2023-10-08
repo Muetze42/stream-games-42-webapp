@@ -3,9 +3,13 @@
 namespace {{ namespace }};
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class {{ class }} extends Model
 {
+    use SoftDeletes;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -26,4 +30,12 @@ class {{ class }} extends Model
      * @var array<int, string>
      */
     protected $hidden = [];
+
+    /**
+     * Get the user that owns the setting.
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 }

@@ -11,11 +11,11 @@ class {{ class }}
     /**
      * Determine whether the user can view any models.
      *
-     * @param \{{ namespacedUserModel }}|null $user
+     * @param \{{ namespacedUserModel }} $user
      *
      * @return bool
      */
-    public function viewAny(?{{ user }} $user): bool
+    public function viewAny({{ user }} $user): bool
     {
         return true;
     }
@@ -23,14 +23,14 @@ class {{ class }}
     /**
      * Determine whether the user can view the model.
      *
-     * @param \{{ namespacedUserModel }}|null $user
+     * @param \{{ namespacedUserModel }} $user
      * @param \{{ namespacedModel }} ${{ modelVariable }}
      *
      * @return bool
      */
-    public function view(?{{ user }} $user, {{ model }} ${{ modelVariable }}): bool
+    public function view({{ user }} $user, {{ model }} ${{ modelVariable }}): bool
     {
-        return true;
+        return $user->getKey() === ${{ modelVariable }}->user_id;
     }
 
     /**
@@ -42,7 +42,7 @@ class {{ class }}
      */
     public function create({{ user }} $user): bool
     {
-        return $user->tokenCan('{{ modelVariable }}:create');
+        return true;
     }
 
    /**
@@ -55,7 +55,7 @@ class {{ class }}
      */
     public function update({{ user }} $user, {{ model }} ${{ modelVariable }}): bool
     {
-        return $user->tokenCan('{{ modelVariable }}:update');
+        return $user->getKey() === ${{ modelVariable }}->user_id;
     }
 
     /**
@@ -68,7 +68,7 @@ class {{ class }}
      */
     public function delete({{ user }} $user, {{ model }} ${{ modelVariable }}): bool
     {
-        return $user->tokenCan('{{ modelVariable }}:delete');
+        return $user->getKey() === ${{ modelVariable }}->user_id;
     }
 
     /**
@@ -81,7 +81,7 @@ class {{ class }}
      */
     public function restore({{ user }} $user, {{ model }} ${{ modelVariable }}): bool
     {
-        return $user->tokenCan('{{ modelVariable }}:restore');
+        return $user->getKey() === ${{ modelVariable }}->user_id;
     }
 
     /**
@@ -94,6 +94,6 @@ class {{ class }}
      */
     public function forceDelete({{ user }} $user, {{ model }} ${{ modelVariable }}): bool
     {
-        return $user->is_admin && $user->tokenCan('{{ modelVariable }}:forceDelete');
+        return $user->getKey() === ${{ modelVariable }}->user_id;
     }
 }

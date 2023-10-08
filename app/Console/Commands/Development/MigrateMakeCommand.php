@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Console\Commands\Migrations;
+namespace App\Console\Commands\Development;
 
-use Illuminate\Database\Migrations\MigrationCreator;
 use Illuminate\Database\Console\Migrations\MigrateMakeCommand as Command;
+use Illuminate\Database\Migrations\MigrationCreator;
 use Illuminate\Support\Composer;
 
 class MigrateMakeCommand extends Command

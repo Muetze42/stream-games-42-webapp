@@ -41,8 +41,9 @@ class ConnectionAttempt extends Model
      * @var array<int, string>
      */
     protected $hidden = [
-        'client',
-        'platform',
+        'ip_hash',
+        'uri',
+        'token',
         'data',
     ];
 
@@ -64,13 +65,8 @@ class ConnectionAttempt extends Model
     public static function booted(): void
     {
         static::creating(function (self $attempt) {
-            if ($clientKey = config('app-connector.header.client')) {
-                $attempt->client = request()->header($clientKey);
-            }
-            if ($plattformKey = config('app-connector.header.plattform')) {
-                $attempt->platform = request()->header($plattformKey);
-            }
             $attempt->uri = str(Str::random())->lower();
+            $attempt->ip_hash = md5(request()->ip());
         });
     }
 

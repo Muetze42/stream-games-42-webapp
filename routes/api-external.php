@@ -16,22 +16,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::withoutMiddleware('auth:sanctum')->group(function () {
-    Route::get('/', function () {
-        return [
-            'message' => 'It work’s!',
-            'authenticated' => auth()->check(),
-            'time' => now(),
-        ];
-    })->name('online-check');
+Route::get('/', function () {
+    return [
+        'message' => 'It work’s!',
+        'authenticated' => auth()->check(),
+        'time' => now(),
+    ];
+})->name('check-reachability')->withoutMiddleware('auth:sanctum');
 
-    Route::prefix('connect')->name('connect.')->group(function () {
-        Route::post('create', [AuthController::class, 'create'])
-            ->name('create');
-    });
-
-    Route::resource('resources.contents', ContentController::class);
+Route::prefix('connect')->name('connect.')->group(function () {
+    Route::post('create', [AuthController::class, 'create'])
+        ->name('create')
+        ->withoutMiddleware('auth:sanctum');
 });
 
 Route::get('user', [UserController::class, 'show'])
-    ->name('user.show');
+    ->name('get.authorized.user');
+
+Route::resource('resources.contents', ContentController::class);

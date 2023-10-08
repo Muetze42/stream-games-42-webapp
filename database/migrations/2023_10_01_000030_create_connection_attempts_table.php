@@ -13,8 +13,7 @@ return new class extends Migration {
         Schema::create('connection_attempts', function (Blueprint $table) {
             $table->string('id')->primary();
             $table->nullableMorphs('authenticatable', 'auth');
-            $table->string('client')->nullable();
-            $table->string('platform')->nullable();
+            $table->char('ip_hash', 32)->nullable();
             $table->string('uri')->nullable();
             $table->text('token')->nullable();
             $table->longText('data')->nullable();

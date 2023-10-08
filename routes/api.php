@@ -22,7 +22,7 @@ Route::get('/', function () {
         'authenticated' => auth()->check(),
         'time' => now(),
     ];
-})->name('online-check');
+})->name('check-reachability');
 Route::post('/releases', [ReleaseController::class, 'index'])
     ->name('release.index');
 Route::post(

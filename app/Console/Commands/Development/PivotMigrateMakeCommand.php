@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Console\Commands\Migrations;
+namespace App\Console\Commands\Development;
 
 use NormanHuth\HelpersLaravel\App\Console\Commands\Development\PivotMigrateMakeCommand as Command;
 

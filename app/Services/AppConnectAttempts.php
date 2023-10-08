@@ -3,11 +3,10 @@
 namespace App\Services;
 
 use App\Models\ConnectionAttempt;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Http\Request;
 
-class AppConnect
+class AppConnectAttempts
 {
     /**
      * Get the ID, token and uri for a connection attempt.
@@ -34,7 +33,6 @@ class AppConnect
      * @param \Illuminate\Http\Request|null $request
      * @param string                        $id
      * @param string                        $uri
-     * @param bool                          $validate
      *
      * @return \App\Models\ConnectionAttempt|null
      */
@@ -42,25 +40,13 @@ class AppConnect
         ConnectionAttempt $attempt,
         ?Request $request,
         string $id,
-        string $uri,
-        bool $validate = true
+        string $uri
     ): ConnectionAttempt|null {
         /* @var \App\Models\ConnectionAttempt|\Illuminate\Database\Eloquent\Builder $attempt */
         $attempt = $attempt
             ->whereId($id)
             ->whereUri($uri)
-            ->when(
-                $validate && $request,
-                function (ConnectionAttempt|Builder $query) use ($request) {
-                    $query->whereClient($request->header('machineId'));
-                }
-            )
-            ->when(
-                $validate && $request,
-                function (ConnectionAttempt|Builder $query) use ($request) {
-                    $query->wherePlatform($request->header('plattform'));
-                }
-            );
+            ->where('ip_hash', md5($request->ip()));
 
         if ($duration = config('app-connector.connection-attempt-duration')) {
             $attempt->where('created_at', '>=', now()->subMinutes($duration));

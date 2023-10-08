@@ -64,8 +64,7 @@ namespace App\Models{
  * @property string $id
  * @property string|null $authenticatable_type
  * @property int|null $authenticatable_id
- * @property string|null $client
- * @property string|null $platform
+ * @property string|null $ip_hash
  * @property string|null $uri
  * @property mixed|null $token
  * @property array|null $data
@@ -76,11 +75,10 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|ConnectionAttempt query()
  * @method static \Illuminate\Database\Eloquent\Builder|ConnectionAttempt whereAuthenticatableId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ConnectionAttempt whereAuthenticatableType($value)
- * @method static \Illuminate\Database\Eloquent\Builder|ConnectionAttempt whereClient($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ConnectionAttempt whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ConnectionAttempt whereData($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ConnectionAttempt whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|ConnectionAttempt wherePlatform($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ConnectionAttempt whereIpHash($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ConnectionAttempt whereToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ConnectionAttempt whereUri($value)
  */
