@@ -1,9 +1,6 @@
 <?php
 
 // @formatter:off
-// phpcs:ignore
-// phpcs:disable
-
 /**
  * A helper file for your Eloquent Models
  * Copy the phpDocs from this file to the correct Model,
@@ -57,9 +54,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Activity withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Activity withoutTrashed()
  */
-    class Activity extends \Eloquent
-    {
-    }
+	class Activity extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -87,9 +82,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|ConnectionAttempt whereToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ConnectionAttempt whereUri($value)
  */
-    class ConnectionAttempt extends \Eloquent
-    {
-    }
+	class ConnectionAttempt extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -125,9 +118,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|PersonalAccessToken whereTokenableType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|PersonalAccessToken whereUpdatedAt($value)
  */
-    class PersonalAccessToken extends \Eloquent
-    {
-    }
+	class PersonalAccessToken extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -169,9 +160,36 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Release whereVirusTotalId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Release whereVirusTotalStats($value)
  */
-    class Release extends \Eloquent
-    {
-    }
+	class Release extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\Score
+ *
+ * @property int $id
+ * @property int $user_id
+ * @property string $name
+ * @property array $data
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \App\Models\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder|Score newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Score newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Score onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Score query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Score whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Score whereData($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Score whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Score whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Score whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Score whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Score whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Score withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Score withoutTrashed()
+ */
+	class Score extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -200,9 +218,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Setting withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Setting withoutTrashed()
  */
-    class Setting extends \Eloquent
-    {
-    }
+	class Setting extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -227,6 +243,8 @@ namespace App\Models{
  * @property-read int|null $connection_attempts_count
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
  * @property-read int|null $notifications_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Setting> $scores
+ * @property-read int|null $scores_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Setting> $settings
  * @property-read int|null $settings_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\PersonalAccessToken> $tokens
@@ -249,7 +267,6 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|User whereTwitchId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
  */
-    class User extends \Eloquent
-    {
-    }
+	class User extends \Eloquent {}
 }
+

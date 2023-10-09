@@ -11,8 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('{{ table }}', function (Blueprint $table) {
-            //
+        Schema::create('scores', function (Blueprint $table) {
+            $table->id();
+            $table->foreignIdFor(\App\Models\User::class)
+                ->constrained();
+            $table->string('name');
+            $table->json('data');
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -21,8 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('{{ table }}', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('scores');
     }
 };

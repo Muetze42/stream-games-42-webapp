@@ -23,6 +23,8 @@ class ExchangeController extends Controller
      */
     protected array $hiddenColumns = ['user_id', 'deleted_at'];
 
+    protected string $relationMethod;
+
     /**
      * The default validation rules for the API concept.
      *
@@ -39,6 +41,7 @@ class ExchangeController extends Controller
     public function __construct()
     {
         $action = getRouteAction(request());
+        $this->relationMethod = Str::camel($action);
         $model = Str::studly(Str::singular($action));
 
         $this->authorizeResource('\\App\\Models\\' . $model, Str::snake($model));
@@ -56,7 +59,7 @@ class ExchangeController extends Controller
      */
     public function index(Request $request)
     {
-        return $request->user()->settings()->get($this->indexColumns);
+        return $request->user()->{$this->relationMethod}->get($this->indexColumns);
     }
 
     /**
@@ -67,7 +70,7 @@ class ExchangeController extends Controller
         $request->validate($this->validationRules);
 
         $request->user()
-            ->settings()
+            ->{$this->relationMethod}
             ->create($request->only(array_keys($this->validationRules)));
 
         return true;

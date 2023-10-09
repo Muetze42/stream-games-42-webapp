@@ -141,4 +141,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(Setting::class);
     }
+
+    /**
+     * Get the scores for the user.
+     */
+    public function scores(): HasMany
+    {
+        return $this->hasMany(Setting::class);
+    }
 }

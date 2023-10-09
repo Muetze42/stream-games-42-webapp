@@ -37,4 +37,5 @@ Route::prefix('connect')->name('connect.')->group(function () {
  * Stream Games API routes.
  */
 Route::apiResource('user', UserController::class)->only('show');
-Route::apiResource('settings', ExchangeController::class)->withoutMiddleware('auth:sanctum');
+Route::apiResource('settings', ExchangeController::class);
+Route::apiResource('scores', ExchangeController::class);
