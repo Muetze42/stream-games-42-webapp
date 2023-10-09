@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\External;
 
-use App\Http\Controllers\Controller as BaseController;
+use App\Http\Controllers\AbstractController as Controller;
 
-class Controller extends BaseController
+abstract class AbstractController extends Controller
 {
     /**
      * Execute the index query with this "select" statement.

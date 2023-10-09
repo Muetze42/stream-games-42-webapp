@@ -5,15 +5,14 @@ namespace App\Http\Controllers\External;
 use App\Models\Setting;
 use Illuminate\Http\Request;
 
-class SettingController extends Controller
+class SettingController extends AbstractController
 {
     /**
-     * Create the controller instance.
+     * The Controller Model for authorization.
+     *
+     * @var string|null
      */
-    public function __construct()
-    {
-        $this->authorizeResource(Setting::class, 'setting');
-    }
+    protected ?string $model = Setting::class;
 
     /**
      * Display a listing of the resource.

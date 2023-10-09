@@ -3,6 +3,7 @@
 namespace App\Console\Commands\Development;
 
 use Illuminate\Routing\Console\ControllerMakeCommand as Command;
+use Illuminate\Support\Str;
 use function App\Console\Commands\Development\Controllers\confirm;
 
 class ControllerMakeCommand extends Command
@@ -33,8 +34,8 @@ class ControllerMakeCommand extends Command
             'DummyModelClass' => class_basename($modelClass),
             '{{ model }}' => class_basename($modelClass),
             '{{model}}' => class_basename($modelClass),
-            '{{ modelParameter }}' => strtolower(class_basename($modelClass)),
-            '{{modelParameter}}' => strtolower(class_basename($modelClass)),
+            '{{ modelParameter }}' => Str::snake(class_basename($modelClass)),
+            '{{modelParameter}}' => Str::snake(class_basename($modelClass)),
             'DummyModelVariable' => lcfirst(class_basename($modelClass)),
             '{{ modelVariable }}' => lcfirst(class_basename($modelClass)),
             '{{modelVariable}}' => lcfirst(class_basename($modelClass)),

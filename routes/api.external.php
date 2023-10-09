@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\External\AuthController;
+use App\Http\Controllers\External\AuthAbstractController;
 use App\Http\Controllers\External\SettingController;
 use App\Http\Controllers\External\UserController;
 use Illuminate\Support\Facades\Route;
@@ -25,7 +25,7 @@ Route::get('/', function () {
 })->name('check-reachability')->withoutMiddleware('auth:sanctum');
 
 Route::prefix('connect')->name('connect.')->group(function () {
-    Route::post('create', [AuthController::class, 'create'])
+    Route::post('create', [AuthAbstractController::class, 'create'])
         ->name('create')
         ->withoutMiddleware('auth:sanctum');
 });
@@ -33,4 +33,5 @@ Route::prefix('connect')->name('connect.')->group(function () {
 Route::get('user', [UserController::class, 'show'])
     ->name('get.authorized.user');
 
-Route::resource('settings', SettingController::class);
+Route::resource('settings', SettingController::class)
+    ->withoutMiddleware('auth:sanctum');

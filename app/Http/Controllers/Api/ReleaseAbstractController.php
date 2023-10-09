@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\AbstractController;
 use App\Models\Release;
 
-class ReleaseController extends Controller
+class ReleaseAbstractController extends AbstractController
 {
     /**
      * The needed release columns.

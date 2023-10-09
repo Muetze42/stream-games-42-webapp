@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers\External;
 
-use App\Http\Controllers\Controller;
 use App\Services\AppConnectAttempts;
 
-class AuthController extends Controller
+class AuthAbstractController extends AbstractController
 {
     /**
      * Create a new connection attempt.
