@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\External\AuthAbstractController;
-use App\Http\Controllers\External\SettingController;
-use App\Http\Controllers\External\UserController;
+use App\Http\Controllers\Api\External\AuthAbstractController;
+use App\Http\Controllers\Api\External\SettingController;
+use App\Http\Controllers\Api\External\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*

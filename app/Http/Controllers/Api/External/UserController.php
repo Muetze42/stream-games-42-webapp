@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\External;
+namespace App\Http\Controllers\Api\External;
 
 use Illuminate\Http\Request;
 

@@ -4,14 +4,30 @@ namespace App\Console\Commands\Development;
 
 use Illuminate\Routing\Console\ControllerMakeCommand as Command;
 use Illuminate\Support\Str;
-use function App\Console\Commands\Development\Controllers\confirm;
+
+use function Laravel\Prompts\confirm;
 
 class ControllerMakeCommand extends Command
 {
     /**
+     * Get the desired class name from the input.
+     *
+     * @return string
+     */
+    protected function getNameInput(): string
+    {
+        if ($this->option('api') && !str_contains($this->argument('name'), '\\')) {
+            return 'Api\\External\\' . trim($this->argument('name'));
+        }
+
+        return trim($this->argument('name'));
+    }
+
+    /**
      * Build the model replacement values.
      *
-     * @param  array  $replace
+     * @param array $replace
+     *
      * @return array
      */
     protected function buildModelReplacements(array $replace): array
@@ -39,6 +55,8 @@ class ControllerMakeCommand extends Command
             'DummyModelVariable' => lcfirst(class_basename($modelClass)),
             '{{ modelVariable }}' => lcfirst(class_basename($modelClass)),
             '{{modelVariable}}' => lcfirst(class_basename($modelClass)),
+            '{{ relationMethod }}' => Str::camel(Str::plural(class_basename($modelClass))),
+            '{{relationMethod}}' => Str::camel(Str::plural(class_basename($modelClass))),
         ]);
     }
 }
