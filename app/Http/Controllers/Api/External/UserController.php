@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Api\External;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class UserController extends AbstractController
+class UserController extends Controller
 {
     /**
      * Display the authenticated user resource.

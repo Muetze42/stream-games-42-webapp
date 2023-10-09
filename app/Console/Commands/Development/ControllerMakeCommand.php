@@ -14,14 +14,14 @@ class ControllerMakeCommand extends Command
      *
      * @return string
      */
-    protected function getNameInput(): string
-    {
-        if ($this->option('api') && !str_contains($this->argument('name'), '\\')) {
-            return 'Api\\External\\' . trim($this->argument('name'));
-        }
-
-        return trim($this->argument('name'));
-    }
+//    protected function getNameInput(): string
+//    {
+//        if ($this->option('api') && !str_contains($this->argument('name'), '\\')) {
+//            return 'Api\\External\\' . trim($this->argument('name'));
+//        }
+//
+//        return trim($this->argument('name'));
+//    }
 
     /**
      * Build the model replacement values.

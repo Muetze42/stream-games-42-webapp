@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\AbstractController;
+use App\Http\Controllers\Controller;
 use App\Models\Release;
 use Illuminate\Http\Request;
 
-class GitHubWebhookAbstractController extends AbstractController
+class GitHubWebhookController extends Controller
 {
     /**
      * Handle GitHub Release Webhook requests.

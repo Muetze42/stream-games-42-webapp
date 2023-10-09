@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\Api\GitHubWebhookAbstractController;
-use App\Http\Controllers\Api\ReleaseAbstractController;
+use App\Http\Controllers\Api\GitHubWebhookController;
+use App\Http\Controllers\Api\ReleaseController;
 use Illuminate\Support\Facades\Route;
 use NormanHuth\HelpersLaravel\App\Http\Middleware\EnsureGitHubTokenIsValid;
 
@@ -23,9 +23,9 @@ Route::get('/', function () {
         'time' => now(),
     ];
 })->name('check-reachability');
-Route::post('/releases', [ReleaseAbstractController::class, 'index'])
+Route::post('/releases', [ReleaseController::class, 'index'])
     ->name('release.index');
 Route::post(
     'github-webhook/' . config('services.github.webhook_path') . '/release',
-    [GitHubWebhookAbstractController::class, 'release']
+    [GitHubWebhookController::class, 'release']
 )->middleware(EnsureGitHubTokenIsValid::class)->name('git-hub-webhook.release');

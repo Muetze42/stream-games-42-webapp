@@ -4,6 +4,7 @@ use App\Jobs\Releases\VirusTotalScan;
 use App\Models\Release;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Encryption\Encrypter;
+use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 if (!function_exists('clientEncrypt')) {
@@ -112,5 +113,19 @@ if (!function_exists('updateOrCreateRelease')) {
         }
 
         return $release;
+    }
+}
+
+if (!function_exists('getRouteAction')) {
+    /**
+     * Get action by resource route.
+     *
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return string
+     */
+    function getRouteAction(Request $request): string
+    {
+        return strrev(explode('.', strrev($request->route()->getName()), 3)[1]);
     }
 }

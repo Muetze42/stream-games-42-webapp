@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\Api\External\AuthAbstractController;
-use App\Http\Controllers\Api\External\SettingController;
+use App\Http\Controllers\Api\External\AuthController;
+use App\Http\Controllers\Api\External\ExchangeController;
 use App\Http\Controllers\Api\External\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -24,14 +24,17 @@ Route::get('/', function () {
     ];
 })->name('check-reachability')->withoutMiddleware('auth:sanctum');
 
+/**
+ * Authentication process routes.
+ */
 Route::prefix('connect')->name('connect.')->group(function () {
-    Route::post('create', [AuthAbstractController::class, 'create'])
+    Route::post('create', [AuthController::class, 'create'])
         ->name('create')
         ->withoutMiddleware('auth:sanctum');
 });
 
-Route::get('user', [UserController::class, 'show'])
-    ->name('get.authorized.user');
-
-Route::resource('settings', SettingController::class)
-    ->withoutMiddleware('auth:sanctum');
+/**
+ * Stream Games API routes.
+ */
+Route::apiResource('user', UserController::class)->only('show');
+Route::apiResource('settings', ExchangeController::class)->withoutMiddleware('auth:sanctum');

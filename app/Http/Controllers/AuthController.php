@@ -9,7 +9,7 @@ use Inertia\Inertia;
 use Laravel\Socialite\Facades\Socialite;
 use App\Models\User;
 
-class AuthController extends AbstractController
+class AuthController extends Controller
 {
     /**
      * Twitch Access Token Scopes.

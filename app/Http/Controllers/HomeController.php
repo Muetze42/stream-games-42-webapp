@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Inertia\Inertia;
 
-class HomeController extends AbstractController
+class HomeController extends Controller
 {
     /**
      * Display the homepage.
